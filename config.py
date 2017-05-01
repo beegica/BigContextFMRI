@@ -1,6 +1,4 @@
 
-
-
 _ins_filename = "instruct.rst"
 INSTRUCTIONS = open(_ins_filename).read()
 
@@ -11,6 +9,8 @@ FONT_SIZE = 35
 LOC_STIM_DUR = 0.500
 LOC_INTER_STIM_DUR = 1.0
 
-
+MAIN_STIM_DUR = 2.0
+MAIN_INTER_JITTER = .5
+MAIN_INTER_STIM_DUR = 1.75
 
 BUTTON_BOX_KEYS

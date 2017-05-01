@@ -16,7 +16,8 @@ def waitRun():
 exp = Experiment()
 
 RstDocument(text=Cg.instructions)
-
+with UntilDone():
+    KeyPress(keys=Cg.FMRI_BUTTONS)
 
 with Loop(runs) as run:
     Wait(1.)
@@ -25,6 +26,22 @@ with Loop(runs) as run:
               blocking=False)
         Func(waitRun)
     Wait(1.)
-    with Loop(run.current) as trial:
+    with Loop(run.current) as mainTrial:
+        Func(waitTR)
+        mainImage = Image(source=mainTrial.current['stim'],
+                          duration=Cg.MAIN_STIM_DUR)
+        Wait(until=mainImage.disappear_time)
+        ResetClock(mainImage.disappear_time['time'])
+        Wait(duration=Cg.MAIN_INTER_STIM_DUR, jitter=Cg.MAIN_INTER_JITTER)
 
-with Loop():
+
+RstDocument(text=Cg.loc_instructions)
+with UntilDone():
+    KeyPress(keys=Cg.FMRI_BUTTONS)
+
+with Loop(locRun) as locTrial:
+    locImage = Image(source=locTrial.current['stim'],
+                     duration=Cg.LOC_STIM_DUR)
+    Wait(until=locImage.disappear_time)
+    ResetClock(locImage.disappear_time['time'])
+    Wait(Cg.LOC_INTER_STIM_DUR)

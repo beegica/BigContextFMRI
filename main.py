@@ -16,12 +16,12 @@ locRuns = getDefaultLocalizer()
 exp = Experiment()
 
 RstDocument(text=Cg.MAIN_INSTRUCTIONS, width=exp.screen.width*2/3,
-            height=exp.screen.height)
+            height=exp.screen.height, base_font_size=Cg.RST_FONT_SIZE)
 with UntilDone():
     KeyPress(keys=Cg.BUTTON_BOX_KEYS)
 
 RstDocument(text=Cg.MAIN_STUDY_INSTRUCTIONS, width=exp.screen.width*2/3,
-            height=exp.screen.height)
+            height=exp.screen.height, base_font_size=Cg.RST_FONT_SIZE)
 with UntilDone():
     KeyPress(keys=Cg.BUTTON_BOX_KEYS)
 
@@ -54,7 +54,7 @@ with Loop(runs['study']) as sRun:
 
 Wait(0.500)
 RstDocument(text=Cg.MAIN_MATHD_INSTRUCTIONS, width=exp.screen.width*2/3,
-            height=exp.screen.height)
+            height=exp.screen.height, base_font_size=Cg.RST_FONT_SIZE)
 with UntilDone():
     KeyPress(keys=Cg.BUTTON_BOX_KEYS)
 
@@ -65,7 +65,7 @@ MathDistract(duration=Cg.MD_DUR, num_vars=Cg.MD_NUM_VAR,
 Wait(0.500)
 
 RstDocument(text=Cg.MAIN_TEST_INSTRUCTIONS, width=exp.screen.width*2/3,
-            height=exp.screen.height)
+            height=exp.screen.height, base_font_size=Cg.RST_FONT_SIZE)
 with UntilDone():
     KeyPress(keys=Cg.BUTTON_BOX_KEYS)
 
@@ -111,28 +111,9 @@ with Loop(runs['test']) as tRun:
             original_tr=testTR.press_time
             )
 
-# DTI
-Wait(1.0)
-Label(text="Please wait.", font_size=Cg.FONT_SIZE)
-with UntilDone():
-    KeyPress(keys=Cg.TR_KEYS)
-Label(text="+", font_size=Cg.FONT_SIZE)
-with UntilDone():
-    KeyPress(keys=Cg.RUN_START_KEYS)
-
-
-# RESTING STATE
-Wait(1.0)
-Label(text="Please wait.", font_size=Cg.FONT_SIZE)
-with UntilDone():
-    KeyPress(keys=Cg.TR_KEYS)
-Label(text="+", font_size=Cg.FONT_SIZE)
-with UntilDone():
-    KeyPress(keys=Cg.RUN_START_KEYS)
-
 # LOCALIZER
 RstDocument(text=Cg.LOC_INSTRUCTIONS, width=exp.screen.width*2/3,
-            height=exp.screen.height)
+            height=exp.screen.height, base_font_size=Cg.RST_FONT_SIZE)
 with UntilDone():
     KeyPress(keys=Cg.BUTTON_BOX_KEYS)
 
@@ -167,6 +148,26 @@ with Loop(locRuns) as locTrial:
         rt=locKP.rt,
         correct=locKP.correct,
         original_tr=locTR.press_time)
+
+
+# DTI
+Wait(1.0)
+Label(text="Please wait.", font_size=Cg.FONT_SIZE)
+with UntilDone():
+    KeyPress(keys=Cg.TR_KEYS)
+Label(text="+", font_size=Cg.FONT_SIZE)
+with UntilDone():
+    KeyPress(keys=Cg.RUN_START_KEYS)
+
+
+# RESTING STATE
+Wait(1.0)
+Label(text="Please wait.", font_size=Cg.FONT_SIZE)
+with UntilDone():
+    KeyPress(keys=Cg.TR_KEYS)
+Label(text="+", font_size=Cg.FONT_SIZE)
+with UntilDone():
+    KeyPress(keys=Cg.RUN_START_KEYS)
 
 Label(text="The experiment is complete! Please wait!")
 with UntilDone():

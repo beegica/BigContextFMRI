@@ -1,11 +1,11 @@
-from video import Label
-from state import Subroutine, If, Else, UntilDone, Loop, Wait, Debug
-from audio import Beep
-from keyboard import KeyPress
-from ref import Ref
+from smile.video import Label
+from smile.state import Subroutine, If, Else, UntilDone, Loop, Wait, Debug
+from smile.audio import Beep
+from smile.keyboard import KeyPress
+from smile.ref import Ref
 import random
 
-def _gen_questions(num_vars, max_num, min_num, max_probs, plus_and_minus, ans_mod, ans_prob):
+def _gen_questions(num_vars, max_num, min_num, max_probs, keys, plus_and_minus, ans_mod, ans_prob):
         #List Gen
         trials=[]
         for i in range(max_probs):
@@ -125,7 +125,7 @@ def MathDistract(self,
     self.responses = []
 
     trials = Ref(_gen_questions, num_vars, max_num, min_num,
-                 max_probs, plus_and_minus, ans_mod, ans_prob)
+                 max_probs, keys, plus_and_minus, ans_mod, ans_prob)
 
     with Loop(trials) as trial:
         Label(text='+', duration=1.0, font_size=50, color='white')
